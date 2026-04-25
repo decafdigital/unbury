@@ -18,7 +18,7 @@ export function LandingPage({ hasDebts, onStart, onGoDashboard }: Props) {
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand-500" />
             A clear-eyed debt planner
           </p>
-          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-ink md:text-6xl">
+          <h1 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
             Find your fastest path to debt-free.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
@@ -93,7 +93,7 @@ export function LandingPage({ hasDebts, onStart, onGoDashboard }: Props) {
                   d="M8.485 2.495c.664-1.327 2.366-1.327 3.03 0l6.28 12.56c.612 1.223-.283 2.695-1.515 2.695H3.72c-1.232 0-2.127-1.472-1.515-2.694L8.485 2.495ZM10 6a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
                 />
               </svg>
-              <p className="whitespace-nowrap text-base text-ink">
+              <p className="text-base text-ink md:whitespace-nowrap">
                 That's <b className="tnum font-bold">$2,964/year</b> just
                 standing still.
               </p>
@@ -145,7 +145,7 @@ export function LandingPage({ hasDebts, onStart, onGoDashboard }: Props) {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-6xl px-6">
+        <div className="relative mx-auto max-w-6xl px-8 md:px-6">
           <div className="text-center">
             <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-300">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand-400" />
