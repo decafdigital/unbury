@@ -21,7 +21,7 @@ export function Layout({ view, onChange, debtsEntered, children }: Props) {
   return (
     <div className="min-h-screen bg-paper">
       <header className="sticky top-0 z-20 border-b border-line bg-white shadow-nav">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <button
             onClick={() => onChange("home")}
             className="flex items-center gap-2.5 rounded-md transition-opacity duration-150 hover:opacity-80 focus-ring"
@@ -82,11 +82,11 @@ export function Layout({ view, onChange, debtsEntered, children }: Props) {
           </nav>
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-14">
+      <main className="mx-auto max-w-6xl px-6 py-8 md:py-14">
         {children}
       </main>
       <footer className="border-t border-line bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-8 text-xs leading-relaxed text-ink-muted md:px-6">
+        <div className="mx-auto max-w-6xl px-6 py-8 text-xs leading-relaxed text-ink-muted">
           <p>
             <span className="font-semibold text-ink-soft">Unbury</span> is a
             planning tool, not financial advice. All calculations run locally

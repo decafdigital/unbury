@@ -145,7 +145,7 @@ export function LandingPage({ hasDebts, onStart, onGoDashboard }: Props) {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-6xl px-4 md:px-6">
+        <div className="relative mx-auto max-w-6xl px-6">
           <div className="text-center">
             <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-300">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand-400" />
