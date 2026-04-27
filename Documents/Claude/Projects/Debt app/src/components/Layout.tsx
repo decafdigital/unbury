@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type View = "home" | "debts" | "dashboard" | "scenarios" | "plan";
+type View = "home" | "debts" | "dashboard" | "scenarios" | "plan" | "about";
 
 type Props = {
   view: View;
@@ -15,6 +15,7 @@ const navItems: Array<{ id: View; label: string; needsDebts: boolean }> = [
   { id: "dashboard", label: "Dashboard", needsDebts: true },
   { id: "scenarios", label: "Scenarios", needsDebts: true },
   { id: "plan", label: "Action Plan", needsDebts: true },
+  { id: "about", label: "About", needsDebts: false },
 ];
 
 export function Layout({ view, onChange, debtsEntered, children }: Props) {

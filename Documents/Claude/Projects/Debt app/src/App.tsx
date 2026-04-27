@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { About } from "./components/About";
 import { ActionPlan } from "./components/ActionPlan";
 import { Dashboard } from "./components/Dashboard";
 import { DebtForm } from "./components/DebtForm";
@@ -9,7 +10,7 @@ import { Button } from "./components/ui/Button";
 import { clearState, defaultState, loadState, saveState } from "./lib/storage";
 import type { AppState, Consolidation, Debt, ScenarioKey } from "./types";
 
-type View = "home" | "debts" | "dashboard" | "scenarios" | "plan";
+type View = "home" | "debts" | "dashboard" | "scenarios" | "plan" | "about";
 
 export default function App() {
   const [state, setState] = useState<AppState>(() => {
@@ -131,6 +132,8 @@ export default function App() {
             onGoScenarios={() => setView("scenarios")}
           />
         );
+      case "about":
+        return <About />;
     }
   }, [
     view,
@@ -147,7 +150,7 @@ export default function App() {
   return (
     <Layout view={view} onChange={setView} debtsEntered={debtsEntered}>
       {content}
-      {debtsEntered && view !== "home" && (
+      {debtsEntered && view !== "home" && view !== "about" && (
         <div className="mt-10 flex justify-end border-t border-line pt-6">
           <Button variant="ghost" size="sm" onClick={handleReset}>
             Reset all data

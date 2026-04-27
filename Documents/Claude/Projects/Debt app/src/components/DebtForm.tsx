@@ -309,38 +309,105 @@ function DebtRow({
 
   const interest = monthlyInterest(debt);
   const stalled = debt.minPayment <= interest + 0.005;
+  const minNeeded = Math.floor(interest) + 1;
+  const tooltipText = `Your minimum payment (${fmtCurrency(debt.minPayment)}) doesn't cover the monthly interest (${fmtCurrency(interest, { cents: true })}). At this rate, this debt will never be paid off. Pay at least ${fmtCurrency(minNeeded)}/month to start making progress.`;
 
   return (
-    <tr className="border-t border-line hover:bg-paper">
-      <td className="px-5 py-3 font-medium text-ink">
-        {debt.name}
-        {stalled && (
-          <span
-            title="Minimum payment doesn't exceed monthly interest — this debt won't pay off at the minimum."
-            className="ml-2 inline-flex items-center rounded-full bg-cautionSoft px-2 py-0.5 text-xs font-medium text-caution"
-          >
-            Stalling
-          </span>
-        )}
-      </td>
-      <td className="tnum px-5 py-3 text-right">{fmtCurrency(debt.balance)}</td>
-      <td className="tnum px-5 py-3 text-right">{debt.apr.toFixed(2)}%</td>
-      <td className="tnum px-5 py-3 text-right">
-        {fmtCurrency(debt.minPayment)}
-      </td>
-      <td className="tnum px-5 py-3 text-right text-negative">
-        {fmtCurrency(interest, { cents: true })}
-      </td>
-      <td className="px-5 py-3">
-        <div className="flex justify-end gap-2">
-          <Button size="sm" variant="ghost" onClick={() => setEditing(true)}>
-            Edit
-          </Button>
-          <Button size="sm" variant="danger" onClick={onRemove}>
-            Remove
-          </Button>
-        </div>
-      </td>
-    </tr>
+    <>
+      <tr
+        className={`border-t border-line ${stalled ? "" : "hover:bg-paper"}`}
+      >
+        <td className="px-5 py-3 font-medium text-ink">
+          {debt.name}
+          {stalled && (
+            <span
+              title={tooltipText}
+              className="ml-2 inline-flex cursor-help items-center gap-1 rounded-full border border-negative/30 bg-negativeSoft px-2 py-0.5 text-xs font-semibold text-negative"
+            >
+              <svg
+                className="h-3 w-3 shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M8.485 2.495c.664-1.327 2.366-1.327 3.03 0l6.28 12.56c.612 1.223-.283 2.695-1.515 2.695H3.72c-1.232 0-2.127-1.472-1.515-2.694L8.485 2.495ZM10 6a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                />
+              </svg>
+              Never pays off
+              <svg
+                className="h-3 w-3 shrink-0 opacity-70"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm1-11a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-1 3a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V11a1 1 0 0 1 1-1Z"
+                />
+              </svg>
+            </span>
+          )}
+        </td>
+        <td className="tnum px-5 py-3 text-right">
+          {fmtCurrency(debt.balance)}
+        </td>
+        <td className="tnum px-5 py-3 text-right">{debt.apr.toFixed(2)}%</td>
+        <td className="tnum px-5 py-3 text-right">
+          {fmtCurrency(debt.minPayment)}
+        </td>
+        <td className="tnum px-5 py-3 text-right text-negative">
+          {fmtCurrency(interest, { cents: true })}
+        </td>
+        <td className="px-5 py-3">
+          <div className="flex justify-end gap-2">
+            <Button size="sm" variant="ghost" onClick={() => setEditing(true)}>
+              Edit
+            </Button>
+            <Button size="sm" variant="danger" onClick={onRemove}>
+              Remove
+            </Button>
+          </div>
+        </td>
+      </tr>
+      {stalled && (
+        <tr className="border-t border-negative/20 bg-negativeSoft/50">
+          <td colSpan={6} className="px-5 py-3">
+            <div className="flex items-start gap-2.5 text-sm leading-relaxed text-negative">
+              <svg
+                className="mt-0.5 h-4 w-4 shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M8.485 2.495c.664-1.327 2.366-1.327 3.03 0l6.28 12.56c.612 1.223-.283 2.695-1.515 2.695H3.72c-1.232 0-2.127-1.472-1.515-2.694L8.485 2.495ZM10 6a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                />
+              </svg>
+              <p>
+                Your minimum (
+                <b className="tnum font-semibold">
+                  {fmtCurrency(debt.minPayment)}
+                </b>
+                ) doesn't cover this debt's monthly interest (
+                <b className="tnum font-semibold">
+                  {fmtCurrency(interest, { cents: true })}
+                </b>
+                ). At this rate it will never pay off. Pay at least{" "}
+                <b className="tnum font-bold">
+                  {fmtCurrency(minNeeded)}/month
+                </b>{" "}
+                to start reducing this balance.
+              </p>
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
   );
 }
