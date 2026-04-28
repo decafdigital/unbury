@@ -8,7 +8,7 @@ export function About() {
       <div className="mt-8 flex flex-col gap-5 text-lg leading-relaxed text-ink-soft">
         <p>
           Unbury was created by Kim, a web designer in Arizona who was drowning
-          in $80,000 of debt.
+          in debt.
         </p>
         <p>
           After struggling to find honest tools to help plan a payoff strategy,
