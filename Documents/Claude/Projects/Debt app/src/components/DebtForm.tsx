@@ -82,8 +82,8 @@ export function DebtForm({
           Your debts
         </h2>
         <p className="mt-2 text-base leading-relaxed text-ink-muted">
-          Add every credit card, personal loan, or line of credit you're
-          carrying a balance on. You can edit or remove any of them later.
+          Add your credit cards, personal loans, and other high-interest
+          unsecured debt. You can edit or remove any of them later.
         </p>
       </div>
 
@@ -95,7 +95,7 @@ export function DebtForm({
         <div className="grid gap-3 md:grid-cols-4">
           <Input
             label="Name"
-            placeholder="Chase Sapphire"
+            placeholder="Chase Sapphire, Discover, Amex…"
             value={draft.name}
             onChange={(e) =>
               setDraft((d) => ({ ...d, name: e.target.value }))

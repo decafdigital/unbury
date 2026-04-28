@@ -19,11 +19,11 @@ export function LandingPage({ hasDebts, onStart, onGoDashboard }: Props) {
             A clear-eyed debt planner
           </p>
           <h1 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
-            Find your fastest path to debt-free.
+            Find your fastest path out of credit card debt.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
-            Unbury shows the monthly interest draining from each of your
-            balances, compares three realistic payoff plans side by side, and
+            Unbury shows the monthly interest draining from each of your credit
+            cards, compares three realistic payoff strategies side-by-side, and
             builds a month-by-month schedule you can follow.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -38,7 +38,7 @@ export function LandingPage({ hasDebts, onStart, onGoDashboard }: Props) {
               </>
             ) : (
               <Button size="lg" onClick={onStart}>
-                Get started — add your first debt
+                Get started — add your first credit card
               </Button>
             )}
           </div>
@@ -62,7 +62,7 @@ export function LandingPage({ hasDebts, onStart, onGoDashboard }: Props) {
               </h3>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              Example: 3 credit cards carrying a combined balance.
+              Example: 3 credit cards at 18–24% APR.
             </p>
 
             <dl className="mt-7 divide-y divide-[#e5e7eb]">
