@@ -90,7 +90,7 @@ export function ActionPlan({
       </div>
 
       {result.stalled && (
-        <InfoCallout tone="caution" title="Heads up — stalled debts">
+        <InfoCallout tone="alert" title="Heads up — stalled debts">
           These balances won't pay off at the minimum payment entered:{" "}
           <b>{stalledNames.join(", ")}</b>. Consider moving to the avalanche
           scenario or increasing the minimum on those debts.

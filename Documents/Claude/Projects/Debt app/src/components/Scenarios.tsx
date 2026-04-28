@@ -146,7 +146,7 @@ export function Scenarios({
           chosen={chosenScenario === "current"}
           onChoose={() => onChooseScenario("current")}
         >
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Stat
               label="Payoff time"
               value={
@@ -202,7 +202,7 @@ export function Scenarios({
             onChange={(e) => onExtraChange(Number(e.target.value) || 0)}
             hint="Anything you can add on top of your current minimums."
           />
-          <div className="mt-4 grid grid-cols-2 gap-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Stat
               label="Payoff time"
               value={fmtMonths(avalanche.months)}
@@ -245,7 +245,7 @@ export function Scenarios({
           chosen={chosenScenario === "consolidation"}
           onChoose={() => onChooseScenario("consolidation")}
         >
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Input
               label="Loan APR"
               type="number"
@@ -297,7 +297,7 @@ export function Scenarios({
               }
             />
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Stat
               label="New monthly payment"
               value={fmtCurrency(consolidationResult.monthlyPayment, {
@@ -493,8 +493,8 @@ function ScenarioCard({
             : "border-line"
       }`}
     >
-      <div className="flex items-start justify-between gap-3 border-b border-line p-6">
-        <div>
+      <div className="flex items-start justify-between gap-3 border-b border-line p-5 md:p-6">
+        <div className="min-w-0">
           <h3 className="text-base font-bold text-ink">{title}</h3>
           <p className="mt-1 text-sm leading-relaxed text-ink-muted">
             {subtitle}
@@ -512,7 +512,7 @@ function ScenarioCard({
           {chosen ? "Chosen" : "Choose"}
         </button>
       </div>
-      <div className="flex-1 p-6">{children}</div>
+      <div className="flex-1 p-5 md:p-6">{children}</div>
     </div>
   );
 }
