@@ -336,7 +336,7 @@ function DebtRow({
                   d="M8.485 2.495c.664-1.327 2.366-1.327 3.03 0l6.28 12.56c.612 1.223-.283 2.695-1.515 2.695H3.72c-1.232 0-2.127-1.472-1.515-2.694L8.485 2.495ZM10 6a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
                 />
               </svg>
-              Never pays off
+              Trapped in debt
               <svg
                 className="h-3 w-3 shrink-0 opacity-70"
                 viewBox="0 0 20 20"
