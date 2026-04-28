@@ -87,13 +87,30 @@ export function Layout({ view, onChange, debtsEntered, children }: Props) {
         {children}
       </main>
       <footer className="border-t border-line bg-white">
-        <div className="mx-auto max-w-6xl px-8 py-8 text-xs leading-relaxed text-ink-muted md:px-6">
-          <p>
-            <span className="font-semibold text-ink-soft">Unbury</span> is a
-            planning tool, not financial advice. All calculations run locally
-            in your browser — nothing is sent to a server. Your numbers are
-            stored in this device's localStorage.
-          </p>
+        <div className="mx-auto max-w-6xl px-8 py-6 text-xs leading-relaxed text-slate-400 md:px-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-center">
+            <span>
+              Contact:{" "}
+              <a
+                href="mailto:hello@unbury.io"
+                className="transition-colors duration-150 hover:text-brand-700 focus-ring"
+              >
+                hello@unbury.io
+              </a>
+            </span>
+            <span aria-hidden="true" className="text-slate-300">
+              |
+            </span>
+            <span>Privacy: All data stays in your browser</span>
+            <span aria-hidden="true" className="text-slate-300">
+              |
+            </span>
+            <span>Not financial advice</span>
+            <span aria-hidden="true" className="text-slate-300">
+              |
+            </span>
+            <span>&copy; 2026 Unbury</span>
+          </div>
         </div>
       </footer>
     </div>
