@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans leading-relaxed;
+    font-feature-settings: "cv11", "ss01", "ss03";
+  }
+
+  /* headings default to a heavier weight and tighter tracking */
+  h1 {
+    @apply font-extrabold tracking-tight text-ink;
+    line-height: 1.1;
+  }
+  h2 {
+    @apply font-bold tracking-tight text-ink;
+    line-height: 1.2;
+  }
+  h3 {
+    @apply font-semibold tracking-tight text-ink;
+    line-height: 1.3;
+  }
+  p {
+    line-height: 1.65;
+  }
+
+  /* tabular figures for currency/numbers everywhere */
+  .tnum,
+  input[type="number"] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* strip default number input spinners for a cleaner finance-form feel */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  ::selection {
+    background: #10b981;
+    color: #fff;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-paper;
+  }
+}

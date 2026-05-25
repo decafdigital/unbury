@@ -1,0 +1,46 @@
+type Tab<T extends string> = {
+  id: T;
+  label: string;
+  disabled?: boolean;
+};
+
+type Props<T extends string> = {
+  tabs: Tab<T>[];
+  value: T;
+  onChange: (id: T) => void;
+  className?: string;
+};
+
+export function Tabs<T extends string>({
+  tabs,
+  value,
+  onChange,
+  className = "",
+}: Props<T>) {
+  return (
+    <div
+      role="tablist"
+      className={`inline-flex flex-wrap gap-1 rounded-xl border-2 border-black bg-white p-1 ${className}`}
+    >
+      {tabs.map((tab) => {
+        const active = tab.id === value;
+        return (
+          <button
+            key={tab.id}
+            role="tab"
+            aria-selected={active}
+            disabled={tab.disabled}
+            onClick={() => onChange(tab.id)}
+            className={`rounded-lg px-3.5 py-2 text-sm font-bold transition-colors duration-150 focus-ring disabled:cursor-not-allowed disabled:opacity-40 ${
+              active
+                ? "bg-brand-500 text-black"
+                : "text-black hover:bg-brand-100"
+            }`}
+          >
+            {tab.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
