@@ -518,10 +518,12 @@ function ScenarioCard({
   // On the black variant the default semantic text colors (ink-muted gray,
   // positive green) are unreadable. Re-map descendants to the bold yellow
   // palette so labels, stat values, and helper text all read clearly.
+  // The text-ink override skips <input> elements so typed values stay black
+  // on the input's white background (otherwise white-on-white = invisible).
   const innerOverrides = {
     white: "",
     black:
-      "[&_.text-positive]:!text-brand-500 [&_.text-ink]:!text-white [&_.text-ink-muted]:!text-brand-500/75 [&_.text-ink-soft]:!text-brand-500/85 [&_.border-line]:!border-brand-500/25",
+      "[&_.text-positive]:!text-brand-500 [&_:not(input).text-ink]:!text-white [&_.text-ink-muted]:!text-brand-500/75 [&_.text-ink-soft]:!text-brand-500/85 [&_.border-line]:!border-brand-500/25",
     yellow: "",
   }[variant];
 
