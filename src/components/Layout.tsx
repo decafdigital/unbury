@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type View = "home" | "debts" | "dashboard" | "scenarios" | "plan" | "about";
 
@@ -39,6 +40,36 @@ export function Layout({ view, onChange, debtsEntered, children }: Props) {
   // hero rhythm.
   const pageBg = onHome ? "bg-paper" : "bg-paperSoft";
 
+  // Track whether the mobile nav has additional items scrolled off the right
+  // edge. When true, render a fade + chevron so users know it scrolls
+  // horizontally (otherwise "Action Plan" and "About" are invisible).
+  const mobileNavRef = useRef<HTMLElement>(null);
+  const [mobileNavHasMoreRight, setMobileNavHasMoreRight] = useState(false);
+  useEffect(() => {
+    const el = mobileNavRef.current;
+    if (!el) return;
+    const update = () => {
+      // 2px tolerance so subpixel rounding doesn't keep the indicator on at
+      // the true end of scroll.
+      setMobileNavHasMoreRight(
+        el.scrollLeft + el.clientWidth < el.scrollWidth - 2,
+      );
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [debtsEntered, view]);
+
+  // Gradient color matches the nav background so the fade reads as the nav
+  // itself dissolving toward the right edge.
+  const mobileFadeGradient = onHome
+    ? "bg-gradient-to-l from-brand-500 from-40% via-brand-500/85 to-transparent"
+    : "bg-gradient-to-l from-white from-40% via-white/85 to-transparent";
+
   return (
     <div className={`min-h-screen ${pageBg}`}>
       <header className={`sticky top-0 z-20 ${headerBorder} ${headerBg}`}>
@@ -75,9 +106,12 @@ export function Layout({ view, onChange, debtsEntered, children }: Props) {
             </ul>
           </nav>
         </div>
-        <div className={`${mobileNavDivider} md:hidden`}>
-          <nav className="mx-auto max-w-6xl overflow-x-auto px-3">
-            <ul className="flex min-w-max items-center gap-2 py-2">
+        <div className={`relative ${mobileNavDivider} md:hidden`}>
+          <nav
+            ref={mobileNavRef}
+            className="mx-auto max-w-6xl overflow-x-auto px-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <ul className="flex min-w-max items-center gap-2 py-2 pr-10">
               {navItems.map((item) => {
                 const disabled = item.needsDebts && !debtsEntered;
                 const active = view === item.id;
@@ -97,6 +131,26 @@ export function Layout({ view, onChange, debtsEntered, children }: Props) {
               })}
             </ul>
           </nav>
+          {/* Right-edge fade + chevron — only renders when more items exist
+              off-screen. Sits absolute over the nav so it doesn't scroll. */}
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 right-0 flex w-14 items-center justify-end pr-2 transition-opacity duration-150 ${mobileFadeGradient} ${
+              mobileNavHasMoreRight ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <svg
+              className="h-4 w-4 animate-pulse text-black"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M7.21 5.21a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 1 1-1.06-1.06L10.94 10 7.21 6.27a.75.75 0 0 1 0-1.06Z"
+              />
+            </svg>
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-8 py-8 md:px-6 md:py-14">
