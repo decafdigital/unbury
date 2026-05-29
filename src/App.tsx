@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { About } from "./components/About";
 import { ActionPlan } from "./components/ActionPlan";
 import { Dashboard } from "./components/Dashboard";
@@ -194,6 +195,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <Analytics />
     </Layout>
   );
 }
